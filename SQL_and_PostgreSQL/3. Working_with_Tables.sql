@@ -1,6 +1,6 @@
 /* Table of users to relate to the later to be created table of photos */
 CREATE TABLE users (
-  id SERIAL PRIMARY KEY
+  id SERIAL PRIMARY KEY,
   username VARCHAR(50)
 );
 
