@@ -113,3 +113,74 @@ WHERE
 
 
 /* *********************** SELECT DISTINCT ***************************** */
+
+/* When querying data from a table, you may get dublicate rows. In order to remove 
+these duplicate rows, can use the DISTINCT clause in the SELECT statement */
+
+SELECT
+	DISTINCT lastName
+FROM
+	employees
+ORDER BY
+	lastName;
+
+/* MySQL DISTINCT and NULL values */
+
+/* If a column has NULL values using the DISTINCT clause for that column, MySQL keeps
+ only one NULL value because DISTINCT treats all NULL values as the same value. */
+
+SELECT DISTINCT state 
+FROM customers;
+
+/* MySQL DISTINCT with multiple columns */
+
+/* Can use the DISTINCT clause with more than one column. In this case, MySQL uses the 
+combination of values in these columns to determine the uniqueness of the row in the result set. */
+
+SELECT DISTINCT
+	state, city
+FROM
+	customers
+WHERE 
+	state IS NOT NULL
+ORDER BY
+	state,
+	city;
+
+/* DISTINCT clause vs. GROUP BY clause */
+
+/* If you use the GROUP BY clause in the SELECT statement without using aggregate 
+functions, the GROUP BY clause behaves like the DISTINCT cluase. */
+
+SELECT
+	state
+FROM
+	customers
+GROUP BY state;
+
+/* Is similar to... */
+SELECT DISTINCT
+	state
+FROM
+	customers;
+
+/* MySQL DISCTINCT and aggregate functions */
+SELECT
+	COUNT(DISTINCT state)
+FROM
+	customers
+WHERE
+	country = 'USA';
+
+/* MySQL DISTINCT with LIMIT clause */
+/* In case use the DISTINCT clause with the LIMIT clause, MySQL immediately stops 
+searching when it finds the number of unique rows specified in the LIMIT clause. */
+
+SELECT DISTINCT
+	state 
+FROM
+	customers
+WHERE
+	state IS NOT NULL
+LIMIT 5;
+
