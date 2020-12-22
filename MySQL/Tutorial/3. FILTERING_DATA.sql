@@ -116,7 +116,6 @@ WHERE
 
 /* When querying data from a table, you may get dublicate rows. In order to remove 
 these duplicate rows, can use the DISTINCT clause in the SELECT statement */
-
 SELECT
 	DISTINCT lastName
 FROM
@@ -128,7 +127,6 @@ ORDER BY
 
 /* If a column has NULL values using the DISTINCT clause for that column, MySQL keeps
  only one NULL value because DISTINCT treats all NULL values as the same value. */
-
 SELECT DISTINCT state 
 FROM customers;
 
@@ -136,7 +134,6 @@ FROM customers;
 
 /* Can use the DISTINCT clause with more than one column. In this case, MySQL uses the 
 combination of values in these columns to determine the uniqueness of the row in the result set. */
-
 SELECT DISTINCT
 	state, city
 FROM
@@ -151,7 +148,6 @@ ORDER BY
 
 /* If you use the GROUP BY clause in the SELECT statement without using aggregate 
 functions, the GROUP BY clause behaves like the DISTINCT cluase. */
-
 SELECT
 	state
 FROM
@@ -175,7 +171,6 @@ WHERE
 /* MySQL DISTINCT with LIMIT clause */
 /* In case use the DISTINCT clause with the LIMIT clause, MySQL immediately stops 
 searching when it finds the number of unique rows specified in the LIMIT clause. */
-
 SELECT DISTINCT
 	state 
 FROM
@@ -183,4 +178,13 @@ FROM
 WHERE
 	state IS NOT NULL
 LIMIT 5;
+
+/* *********************** AND ***************************** */
+
+/* In MySQL, zero is considered FALSE and non-zero is treated as TRUE. */
+
+/* When evaluating an expression that has the AND operator, MySQL stops evaluating the remaining parts 
+of the expression whenever it can determine the result. This function called short-curcuit evaluation. */
+SELECT 1 = 0 AND 1 / 0;
+
 
