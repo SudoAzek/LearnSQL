@@ -187,4 +187,72 @@ LIMIT 5;
 of the expression whenever it can determine the result. This function called short-curcuit evaluation. */
 SELECT 1 = 0 AND 1 / 0;
 
+/* Following statement uses the AND operator to find customers who locate in California(CA), USA. */
+SELECT
+	customername,
+	country,
+	state
+FROM
+	customers
+WHERE
+	country = 'USA' AND state = 'CA';
 
+/* By using the AND operator, it's possible to combine more than two Boolean expressions. For example, the 
+following query return the customers who locate in California, USA, and have the credit limit greater than 100K. */
+SELECT
+	customername,
+	country,
+	state,
+	creditLimit
+FROM
+	customers
+WHERE
+	country = 'USA'
+AND state = 'CA'
+AND creditLimit > 100000;
+
+/* *********************** OR ***************************** */
+
+/* MySQL uses short-circuit evaluation for the OR operator, too. So, MySQL stops evaluating the remaining 
+parts of the statement when it can determine the result. */
+SELECT 1 = 1 OR 1 / 0;
+
+/* When using more than one logical operator in an expression, MySQL always evaluates the OR operators after the AND operators. This is called 
+operator precendence which determines the order of evaluation of the operators. MySQL evaluates the operator with higher precendece first. */
+SELECT TRUE OR FALSE AND FALSE;
+
+/* To change the order of evaluation, using parentheses comes handy. */
+SELECT(TRUE OR FALSE) AND FALSE;
+
+/* To get the customers who locate in the USA or France, should use the OR operator in the WHERE clause. */
+SELECT
+	customername,
+	country
+FROM
+	customers
+WHERE 
+	country = 'USA' OR
+	country = 'France';
+
+/* Following statement returns the customers who locate in the USA or France and have a credit limit greater than 100,000. */
+SELECT
+	customername,
+	country,
+	creditLimit
+FROM
+	customers
+WHERE
+	(country = 'USA' OR country = 'France')
+	AND creditLimit > 100000;
+
+/* Notice that if parentheses not used, the query will return the customers who lacate in the USA or the 
+customers who locate in France with credit limit greated than 10K */
+SELECT
+	customername,
+	country,
+	creditLimit
+FROM
+	customers
+WHERE country = 'USA'
+	OR country = 'France'
+	AND creditLimit > 10000;
