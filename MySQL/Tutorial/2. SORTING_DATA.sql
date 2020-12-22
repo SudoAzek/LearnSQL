@@ -1,21 +1,7 @@
-/* Querying data */
-/* Using the MySQL SELECT statement to retrive data from a single column */
-SELECT lastName
-FROM employees;
+/* SORTING DATA */
 
-/* Using the MySQL SELECT statement to query data from multiple columns */
-SELECT
-	lastName,
-	firstName,
-	jobTitle
-FROM
-	employees;
+/* *********************** ORDER BY ***************************** */
 
-/* Using the MySQL SELECT statement to retrieve data from all columns */
-SELECT * FROM employees;
-
-
-/* Sorting data */
 /* Using MySQL ORDER BY clause to sort values in one column */
 SELECT
 	contactLastname,
@@ -78,4 +64,3 @@ ORDER BY
 		,'Resolved'
 		,'Disputed'
 		,'Shipped');
-
