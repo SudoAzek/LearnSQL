@@ -46,3 +46,31 @@ VALUES
 	('My first task', 1),
 	('It is the second task', 2),
 	('This is the second task of the week', 3);
+
+/* This statement shows the current value of the max_allowed_packet variable. */
+SHOW VARIABLES LIKE 'max_allowed_packet';
+
+/* To set a new value for the max_allowed_packet variable, use the following statement, where 
+size is an integer that represents the number of maximum allowed packet size in bytes. */
+SET GLOBAL max_allowed_packet = size;
+
+/* Create a new table called projects to show more demonstrations of multiple rows insert. */
+CREATE TABLE projects(
+	project_id INT AUTO_INCREMENT,
+	name VARCHAR(100) NOT NULL,
+	start_date DATE,
+	end_date DATE,
+	PRIMARY KEY(project_id)	
+);
+
+/* Use the INSERT multiple rows statement to insert two rows int the projects table. */
+INSERT INTO
+	projects(name, start_date, end_date)
+VALUES
+	('AI for Education', '2019-08-01', '2019-12-31'),
+	('ML for Marketing', '2020-03-21', '2020-12-22');
+
+/* When multiple rows inserted, use the LAST_INSERT_ID() fuction to get the last inserted id of an 
+AUTO_INCREMENT column, it can get the id of the first inserted row only, not the id of the last inserted row. */
+SELECT LAST_INSERT_ID();
+
