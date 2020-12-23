@@ -204,3 +204,54 @@ INSERT IGNORE INTO tokens VALUES('abcdefg');
 /* MySQL truncated data before inserting it into the tokens table. */
 
 /* *********************** UPDATE ***************************** */
+
+/* Using MySQL UPDATE to modify values in a single column. */
+
+/* In this example, we will update the email of Mary Patterson to the new email mary.patterson@classicmodelcars.com.
+
+First, find Mary's email from the employees table using the following SELECT statement. */
+SELECT
+	firstName,
+	lastName,
+	email
+FROM
+	employees
+WHERE
+	employeeNumber = 1056;
+
+/* Second, update the email address of Mary to the new email mary.petterson@classicmodelcars.com */
+UPDATE employees
+SET
+	email = 'mary.patterson@classicmodelcars.com'
+WHERE
+	employeeNumber = 1056;
+
+/* Using MySQL UPDATE to modify values in multiple columns. */
+
+/* To update values in the multiple columns, need to specify the assignments in the SET clause. 
+For example, the following statement updates both last name and email columns of employee number 1056. */
+UPDATE employees
+SET
+	lastName = 'Hill',
+	email = 'mary.hill@classicmodelcars.com'
+WHERE
+	employeeNumber = 1056;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
