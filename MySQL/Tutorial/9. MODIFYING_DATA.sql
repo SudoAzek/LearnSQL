@@ -136,3 +136,19 @@ FROM
 WHERE
 	country = 'USA' AND
 	state = 'CA';
+
+/* Using SELECT statement in the VALUES list */
+/*First, create a new table called stats. */
+CREATE TABLE stats (
+	totalProduct INT,
+	totalCustomer INT,
+	totalOrder INT
+);
+
+/* Second, use the INSERT statement to insert values that come from the SELECT statements. */
+INSERT INTO stats(totalProduct, totalCustomer, totalOrder)
+VALUES(
+	(SELECT COUNT(*) FROM products),
+	(SELECT COUNT(*) FROM customers),
+	(SELECT COUNT(*) FROM orders)
+);
