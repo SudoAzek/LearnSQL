@@ -152,3 +152,55 @@ VALUES(
 	(SELECT COUNT(*) FROM customers),
 	(SELECT COUNT(*) FROM orders)
 );
+
+/* *********************** INSERT IGNORE ***************************** */
+
+/* When using the INSERT statement to add multiple rows to a table and if an error occurs during the processing, 
+MySQL terminates the statement and returns an error. As a result, no rows are inserted into the table. However,
+if using the INSERT IGNORE statement, the rows with invalid data that cause the error are ignored and the rows
+with valid data are inserted in the table. */
+
+/* Let's create a new table called subscribers for the practice */
+CREATE TABLE subscribers (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	email VARCHAR(50) NOT NULL UNIQUE
+);
+
+/* The UNIQUE constraint ensures that no duplicate email exists in the email column. */
+
+/* Following statement inserts a new row in the subscribers table. */
+INSERT INTO subscribers(email)
+VALUES('john.doe@gmail.com');
+
+/* Let's execute another statement that insets two rows into the subscribers table. */
+INSERT INTO subscribers(email)
+VALUES('john.doe@gmail.com'),
+	  ('jane.smith@gmail.com'); 
+/* It returns an error. As we have marked our subscribers table with UNIQUE keyword,
+the email john.doe@gmail.com violates the UNIQUE constraint. However, if using the
+INSERT IGNORE statement the duplicate row will be ignored. */
+INSERT IGNORE INTO subscribers(email)
+VALUES('john.doe@gmail.com'),
+	  ('jane.smith@gmail.com');
+
+/* *********************** INSERT IGNORE and STRICT ***************************** */
+
+/* When the strict mode is on, MySQL returns an error and aborts the INSERT statement if you try to insert invalid 
+values int a table. However, if you use the INSTANT IGNORE statement, MySQL will issue a warning instead of an error.
+In addition, it will try to adjust the values to make them valid before adding the value to the table. */
+
+/* Create a new table named tokens to demo. */
+CREATE TABLE tokens(
+	s VARCHAR(6)
+);
+/* In this table, the column s accepts only string whose lengths are less than or equal to 6.
+
+Second, insert a string whose length is seven into the tokens table. */
+INSERT INTO tokens VALUES('abcdefg'); 
+/* MySQL issues an error because the strict mode is on.
+
+Now, use the INSERT IGNORE statement to insert the same string. */
+INSERT IGNORE INTO tokens VALUES('abcdefg');
+/* MySQL truncated data before inserting it into the tokens table. */
+
+/* *********************** UPDATE ***************************** */
