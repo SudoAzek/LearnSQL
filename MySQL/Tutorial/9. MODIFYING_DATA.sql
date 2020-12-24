@@ -237,15 +237,58 @@ SET
 WHERE
 	employeeNumber = 1056;
 
+/* Using MySQL UPDATE to replace string */
 
+/* Following example updates the domain parts of emails of all Sales Reps with office code 6. */
+UPDATE employees
+SET
+	email = REPLACE(email, '@classicmodelcars.com', '@mysqltutorial.org')
+WHERE
+	jobTitle = 'Sales Rep' AND officeCode = 6;
+/* In this example, the REPLACE() function replaces @classicmodelcars.com in the email column with @mysqltutorial.org */
 
+/* Using MySQL UPDATE to update rows returned by a SELECT statement */
 
+/* It's possible to supply the values for the SET clause from a SELECT statement that queries data from other tables. 
+For example, in the customers table, some customers do not have any sale representative. The value of the column
+saleRepEmployeeNumber is NULL as follows. */
+SELECT
+	customerName,
+	salesRepEmployeeNumber
+FROM
+	customers
+WHERE
+	salesRepEmployeeNumber IS NULL;
+/* We can take a sale representative and update for those customers. To do that, we can select a random employee whose job
+title is Sales Rep from the employees table and update it for the employees table.
 
+This query selects a random employee from the table employees whose job title is the Sales Rep. */
+SELECT
+	employeeNumber
+FROM
+	employees
+WHERE
+	jobTitle = 'Sales Rep'
+ORDER BY RAND()
+LIMIT 1;
 
-
-
-
-
+/* To update the sales representative employee number column in the customers table, we place the query above in the SET 
+clause of the UPDATE statement as follows. */
+UPDATE customers
+SET
+	salesRepEmployeeNumber = (
+		SELECT
+			employeeNumber
+		FROM
+			employees
+		WHERE
+			jobTitle = 'Sales Rep'
+		ORDER BY RAND()
+		LIMIT 1
+		)
+WHERE
+salesRepEmployeeNumber IS NULL;
+		)
 
 
 
