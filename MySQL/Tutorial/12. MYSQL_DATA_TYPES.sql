@@ -11,7 +11,7 @@
 	DECIMAL		- 	A fixed-point number
 	FLOAT		-	A single-precision floating point number
 	DOUBLE		- 	A double-precision floating point number
-	BIT 		- 	A bit field
+	BIT 		- 	A bit field */
 
 /* ****** MYSQL BOOLEAN DATA TYPE ****** */
 
@@ -34,9 +34,50 @@ The following table shows the string date types in MySQL:
 	BLOB		-	A small BLOB
 	MEDIUMBLOB	- 	A medium-sized BLOB
 	LONGBLOB	-	A large BLOB
-	TINYTEXT	-	
-	TEXT
-	MEDIUMTEXT
-	LONGTEXT
-	ENUM
-	SET
+	TINYTEXT	-	A very small non-binary string
+	TEXT 		- 	A small non-binary string
+	MEDIUMTEXT	- 	A medium-sized non-binary string
+	LONGTEXT	-	A large non-binary string
+	ENUM		- 	An enumeration; each column value may be assigned one enumeration member
+	SET			-	A set; each column value may be assigned zero or more SET members */
+
+/* ****** MYSQL DATE AND TIME DATA TYPES ****** */
+
+/* MySQL provides types for date and time as well as the combination of date and time. In addition,
+MySQL supports the timestamp date type for tracking the changes in a row of a table. If just wanted
+to store years without dates and months, it's possible to use the YEAR data type. 
+
+The following table illustrates the MySQL date and time date types:
+	DATE 		-	A date value in CCYY-MM-DD format
+	TIME 		-	A time value in hh:mm:ss format
+	DATETIME 	-	A date and time value in CCYY-MM-DD hh:mm:ss format
+	TIMESTAMP 	-	A timestamp value in CCYY-MM-DD hh:mm:ss format
+	YEAR 		-	A year value in CCYY or YY format */
+
+/* ****** MYSQL SPATIAL DATA TYPES ****** */
+
+/* MySQL supports many spatial date types that contain various kinds of geometrical and georaphical
+values as shown in the following table:
+	GEOMETRY 			-	A spatial value of any type
+	POINT 				- 	A point(a pair of X-Y coordinates)
+	LINESTRING			-	A curve(one or more POINT values)
+	POLYGON				-	A polygon
+	GEOMETRYCOLLECTION	-	A collection of GEOMETRY values
+	MULTILINESTRING		-	A collection of LINESTRING values
+	MULTIPOINT			-	A collection of POINT values
+	MULTIPOLYGON		- 	A collection of POLYGON values
+
+/* ****** MYSQL JSON DATA TYPE ****** */
+
+/* MySQL supported a native JSON data type since version 5.7.8 that allows to store and manage JSON
+documents more effectively. The native JSON data type provides automatic validation of JSON documents
+and optimal storate format. */
+
+
+/* ****** MYSQL INT DATA TYPE ****** */
+
+/* First, create a new table named items with an integer column as the primary key: */
+CREATE TABLE items (
+	item_id INT AUTO_INCREMENT PRIMARY KEY,
+	item_text VARCHAR(255)
+);
