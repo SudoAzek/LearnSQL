@@ -81,3 +81,26 @@ CREATE TABLE items (
 	item_id INT AUTO_INCREMENT PRIMARY KEY,
 	item_text VARCHAR(255)
 );
+
+/* It's possible to use either INT or INTEGER in the CREATE TABLE statement above because they are 
+interchangeable. Whenever a new row inserted into the items table, the value of the item_id column is
+increased by 1.
+
+Next, the following INSERT statement inserts three rows into the items table. */
+INSERT INTO
+	items(item_text)
+VALUES
+	('laptop'),
+	('mouse'),
+	('headphones');
+
+/* After that, insert a new row whose value of the item_id column is specified explicitly */
+INSERT INTO items(item_id, item_text)
+VALUES(10, 'Server');
+
+/* Since the current value of the item_id column is 10, the sequence is reset to 11. if a new row
+inserted, the AUTO_INCREMENT column will use 11 as the next value. */
+INSERT INTO items(item_text)
+VALUES('Router');
+
+/* ****** MYSQL UNSIGNED INT DATA TYPE ****** */
