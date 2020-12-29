@@ -260,9 +260,9 @@ FROM
 WHERE
 	salesRepEmployeeNumber IS NULL;
 /* We can take a sale representative and update for those customers. To do that, we can select a random employee whose job
-title is Sales Rep from the employees table and update it for the employees table.
+title is Sales Rep from the employees table and update it for the employees table. */
 
-This query selects a random employee from the table employees whose job title is the Sales Rep. */
+-- This query selects a random employee from the table employees whose job title is the Sales Rep.
 SELECT
 	employeeNumber
 FROM
@@ -291,10 +291,49 @@ salesRepEmployeeNumber IS NULL;
 		)
 
 
+-- *********************** UPDATE JOIN *****************************
 
+/* We are going to use a new sample database named emp_db for demonstration. This sample database consists of two tables:
+	- The employees table stores employee data with employee id, name, performance, and salary.
+	- The merits table stores employee performance and merit's percentage.
+The following statements create and load data int the emp_db sample database: */
+CREATE DATABASE IF NOT EXISTS emp_db;
 
+USE emp_db;
 
+-- create tables
+CREATE TABLE merits (
+	performance INT(11) NOT NULL,
+	percentage FLOAT NOT NULL,
+	PRIMARY KEY(performance)
+);
 
+CREATE TABLE employees (
+	emp_id INT(11) NOT NULL AUTO_INCREMENT,
+	emp_name VARCHAR(255) NOT NULL,
+	performance INT(11) DEFAULT NULL,
+	salary FLOAT DEFAULT NULL,
+	PRIMARY KEY(emp_id),
+	CONSTRAINT fk_performance FOREIGN KEY(performance)
+		REFERENCES merits(performance)
+);
 
+-- insert data for merits table
+INSERT INTO merits(performance, percentage)
+VALUES(1, 0)
+	 ,(2, 0.01)
+	 ,(3, 0.03)
+	 ,(4, 0.05)
+	 ,(5, 0.08);
 
-
+-- insert data for employees table
+INSERT INTO employees(emp_name, performance, salary)
+VALUES('Mary Doe', 1, 50000)
+	 ,('Cindy Smith', 3, 65000)
+	 ,('Sue Greenspan', 4, 75000)
+	 ,('Grace Dell', 5, 125000)
+	 ,('Nancy Johnson', 3, 85000)
+	 ,('John Doe', 2, 45000)
+	 ,('Lily Bush', 3, 55000);
+		
+-- *********************** UPDATE JOIN WITH INNER JOIN *****************************
