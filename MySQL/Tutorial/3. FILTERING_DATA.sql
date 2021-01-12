@@ -1,7 +1,7 @@
 
-/* FILTERING DATA */
+-- FILTERING DATA
 
-/* *********************** WHERE ***************************** */
+-- *********************** WHERE *****************************
 
 /* Using MySQL WHERE clause to find all employees whose job titles are 'Sales Rep'. */
 SELECT
@@ -112,7 +112,7 @@ WHERE
 	officeCode <= 4;
 
 
-/* *********************** SELECT DISTINCT ***************************** */
+-- *********************** SELECT DISTINCT *****************************
 
 /* When querying data from a table, you may get dublicate rows. In order to remove 
 these duplicate rows, can use the DISTINCT clause in the SELECT statement */
@@ -179,7 +179,7 @@ WHERE
 	state IS NOT NULL
 LIMIT 5;
 
-/* *********************** AND ***************************** */
+-- *********************** AND *****************************
 
 /* In MySQL, zero is considered FALSE and non-zero is treated as TRUE. */
 
@@ -211,7 +211,7 @@ WHERE
 AND state = 'CA'
 AND creditLimit > 100000;
 
-/* *********************** OR ***************************** */
+-- *********************** OR *****************************
 
 /* MySQL uses short-circuit evaluation for the OR operator, too. So, MySQL stops evaluating the remaining 
 parts of the statement when it can determine the result. */
@@ -256,3 +256,33 @@ FROM
 WHERE country = 'USA'
 	OR country = 'France'
 	AND creditLimit > 10000;
+
+-- *********************** IN *****************************
+/* The IN operator allows to determine if a specified value matches any value in a set of values or returned by a subquery */
+
+-- To find the offices that locate in the U.S. and France, use the IN operator as the following query:
+SELECT
+	officeCode
+	,city
+	,phone
+	,country
+FROM
+	offices
+WHERE
+	country IN('USA', 'France');
+
+-- Can achieve the same result with the OR operator as the following query:
+SELECT
+	officeCode
+	,city
+	,phone
+	,country
+FROM
+	offices
+WHERE
+	country = 'USA' OR country = 'France';
+
+/* In case the list has many values, need to construct a very long statement with multiple OR operators. Hence, the IN operator
+allowsto shorten the query and make it more readable.
+
+To get offices that do not locate in USA and France, can use NOT IN */
